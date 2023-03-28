@@ -27,76 +27,101 @@ import java.util.Scanner;
 
 public class Programme_4_Number_Of_Days_In_Month {
     public static void main(String[] args) {
-        inputData();
-        System.out.println(isLeapYear(year));
-        System.out.println("Days in a month " + month + " is " + getDaysInMonth(month, year));
-        //   isLeapYear(year);
+        Scanner scan = new Scanner(System.in); // declaring scanner class for input
+        System.out.print("Enter the year : ");
+        int year = scan.nextInt(); //reading and storing input
+        System.out.print("Enter the month: ");
+        int month = scan.nextInt(); // reading and storing input
+
+        System.out.println(isLeapYear(year)); // calling static method
+
+        getDaysInMonth(month, year); // calling static method
+        scan.close();
+
     }
 
-    static int year, month;
-    //static boolean b, m;
+    public static boolean isLeapYear(int year) // declaring static method
+    {
+        //checking whether the input year is leap year or not
+        if (year >= 1 && year <= 9999) {
+            if (year % 4 == 0 && year % 100 != 0 || year % 400 == 0) {
+                System.out.print(year + " is a leap year since "); // output if the condition is true
+                return true;
 
-    public static void inputData() {
-        Scanner scanner = new Scanner(System.in);  //scanner object
-        System.out.println("Enter a month in MM format");
-        month = scanner.nextInt();
+            } else {
+                System.out.print(year + " is not a leap year since"); //output if the condition is false
+                return false;
+            }
+
+        }
+        System.out.println("Invalid range since"); //output if above conditions are false
+        return false;
+    }
+
+    public static void getDaysInMonth(int month, int year) {
+        //returning the days of the month as per the entered month and year
         if (month < 1 || month > 12) {
-            System.out.println("Invalid Month!. Month should be in between 1 t0 12.");
-        }
 
-        System.out.println("Enter a year in YYYY format: ");
-        year = scanner.nextInt(); // storing value in a variable
+            System.out.print(" -1" + month + " since invalid month"); // output if the condition is true
 
-        if (year < 1 || year > 9999) {   // checks if the year is valid  b = false;
-            System.out.println("Invalid year!, year should be >= 1 and <= 9999. Enter year again");
-        }
-        scanner.close();
-    }
-
-    //get days in month will take the month and year entered above
-
-    public static int getDaysInMonth(int month, int yr) {
-        int days = 0;
-        String Month;
-        if (month < 1 || month > 12 || year < 1 || year > 9999) {
-            return -1;
-        }
-        switch (month) {
-            case 1:
-            case 3:
-            case 5:
-            case 7:
-            case 8:
-            case 10:
-            case 12:
-                days = 31;
-                break;
-            case 2:
-                if (isLeapYear(yr)) {
-                    days = 29;
-                } else {
-                    days = 28;
-                }
-                break;
-            case 4:
-            case 6:
-            case 9:
-            case 11:
-                days = 30;
-                break;
-        }
-        return days;
-    }
-
-    public static boolean isLeapYear(int year) {
-        boolean l;
-        if ((year % 4 == 0) && (year % 100 != 0) || (year % 400 == 0)) { //leap year logic part
-            l = true;
+        } else if (year < 1 || year > 9999) {
+            System.out.print("-1" + year + " since invalid year"); // output if the condition is false
         } else {
-            l = false;
-            // false condition
-            //closing scanner
+            switch (month) {
+                case 1:
+                    System.out.println(" 31 Days in January  " + year);
+                    break;
+                case 2:
+                    if (year % 4 == 0 && year % 100 != 0 || year % 400 == 0) {
+                        System.out.println("29 Days in February " + year);
+                    } else {
+                        System.out.println("28 Days in February " + year);
+                    }
+                    break;
+
+                case 3:
+                    System.out.println(" 31 Days in March " + year);
+                    break;
+
+                case 4:
+                    System.out.println(" 30 Days in April " + year);
+                    break;
+                case 5:
+                    System.out.println(" 31 Days in May " + year);
+                    break;
+
+                case 6:
+                    System.out.println(" 30 Days in June " + year);
+                    break;
+
+                case 7:
+                    System.out.println(" 31 Days in July " + year);
+                    break;
+                case 8:
+                    System.out.println(" 31 Days in August " + year);
+                    break;
+
+                case 9:
+                    System.out.println(" 30 Days in September " + year);
+                    break;
+                case 10:
+                    System.out.println(" 31 Days in October " + year);
+                    break;
+
+                case 11:
+                    System.out.println(" 30 Days in November " + year);
+                    break;
+                case 12:
+                    System.out.println(" 31 Days in December " + year);
+                    break;
+                default:
+                    System.out.println("Enter Valid month number between 1 to 12 ");
+
+            }
+
+
         }
-        return l;
     }
+
+
 }
