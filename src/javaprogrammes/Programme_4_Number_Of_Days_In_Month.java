@@ -22,20 +22,81 @@ Example of input/Output:
 HINT: Use the switch statement.
 NOTE: Methods isLeapYear and getDaysInMonth need to be public static
  */
+
 import java.util.Scanner;
 
 public class Programme_4_Number_Of_Days_In_Month {
-        public static void main(String[] args) {
-            Scanner scanner = new Scanner(System.in); //Creating a scanner object to read input
-            System.out.println("Enter a year");
-            int year;
-            year = scanner.nextInt();
-            if (year >= 1 || year <= 9999){ //Check if the year is within range
-                System.out.println("True");
-            } else {
-                System.out.println("False");
-            }
+    public static void main(String[] args) {
+        inputData();
+        System.out.println(isLeapYear(year));
+        System.out.println("Days in a month " + month + " is " + getDaysInMonth(month, year));
+        //   isLeapYear(year);
+    }
 
-scanner.close();
+    static int year, month;
+    //static boolean b, m;
+
+    public static void inputData() {
+        Scanner scanner = new Scanner(System.in);  //scanner object
+        System.out.println("Enter a month in MM format");
+        month = scanner.nextInt();
+        if (month < 1 || month > 12) {
+            System.out.println("Invalid Month!. Month should be in between 1 t0 12.");
+        }
+
+        System.out.println("Enter a year in YYYY format: ");
+        year = scanner.nextInt(); // storing value in a variable
+
+        if (year < 1 || year > 9999) {   // checks if the year is valid  b = false;
+            System.out.println("Invalid year!, year should be >= 1 and <= 9999. Enter year again");
+        }
+        scanner.close();
+    }
+
+    //get days in month will take the month and year entered above
+
+    public static int getDaysInMonth(int month, int yr) {
+        int days = 0;
+        String Month;
+        if (month < 1 || month > 12 || year < 1 || year > 9999) {
+            return -1;
+        }
+        switch (month) {
+            case 1:
+            case 3:
+            case 5:
+            case 7:
+            case 8:
+            case 10:
+            case 12:
+                days = 31;
+                break;
+            case 2:
+                if (isLeapYear(yr)) {
+                    days = 29;
+                } else {
+                    days = 28;
+                }
+                break;
+            case 4:
+            case 6:
+            case 9:
+            case 11:
+                days = 30;
+                break;
+        }
+        return days;
+    }
+
+    public static boolean isLeapYear(int year) {
+        boolean l;
+        if ((year % 4 == 0) && (year % 100 != 0) || (year % 400 == 0)) { //leap year logic part
+            l = true;
+        } else {
+            l = false;
+            // false condition
+            //closing scanner
+        }
+        return l;
     }
 }
